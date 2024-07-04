@@ -31,13 +31,51 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
-
     <style>
         
-    </style>
-    <style>
+/* Styles for the floating div */
+#floatingDiv {
+    display: none; /* Initially hidden */
+    position: fixed; /* Fixed position */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust position to be centered */
+    background-color: #f9f9f9; /* Background color */
+    padding: 20px; /* Padding */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
+    border-radius: 8px; /* Rounded corners */
+}
+
+/* Styles for the button */
+#showDivButton {
+    display: block;
+    margin: 50px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#goBackButton {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    /* Adjust font size, color, etc. as needed */
+    font-size: 1.5rem;
+    color: #2B3940;
+    cursor: pointer;
+   }
 
 
+.company-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+input::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
     </style>
 </head>
 
@@ -75,15 +113,15 @@
         </div>
         <!-- Header End -->
 
-        <form action="{{ url_for('job_list') }}" method="post" class = "container-xxl">
+        <form action="{{ url_for('job_list') }}" method="post" class = "container-xxl" onsubmit="showspinner()">
             <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
                 <div class="container">
                     <div class="row g-2">
                       <div class="col-md-4">
-                        <input type="text" class="form-control border-0" placeholder="Jobs" name="job">
+                        <input type="text" class="form-control border-0" placeholder="Jobs" name="job" required>
                       </div>
                       <div class="col-md-4">
-                        <select class="form-select border-0" name="experience">
+                        <select class="form-select border-0" name="experience" required>
                           <option selected>Experience</option>
                           <option value="1">1 Year</option>
                           <option value="2">2 Years</option>
@@ -103,18 +141,18 @@
                         </select>
                       </div>
                       <div class="col-md-4">
-                        <input type="text" class="form-control border-0" placeholder="Location" name="location">
+                        <input type="text" class="form-control border-0" placeholder="Location" name="location" required>
                       </div>
                     </div>
                     <div class="row g-2 mt-3">
                       <div class="col-md-4">
-                        <input type="text" class="form-control border-0" name="skillsInput" placeholder="Enter your skills (comma separated)">
+                        <input type="text" class="form-control border-0" name="skillsInput" placeholder="Enter your skills" required>
                       </div>
                       <div class="col-md-4">
-                        <input type="number" class="form-control border-0" name="salaryInput" placeholder="Enter your expected salary">
+                        <input type="number" class="form-control border-0" name="salaryInput" placeholder="Enter your expected salary" required>
                       </div>
                       <div class="col-md-4">
-                        <button class="btn btn-dark border-0 mb-2 w-100" onclick="showspinner()">Search</button>
+                        <button class="btn btn-dark border-0 mb-2 w-100" >Search</button>
                       </div>
                     </div>
                   </div>
@@ -139,7 +177,7 @@
                         <div class="col-md-4" style="margin-bottom: 30px; margin-top: -85px ; width:20%">   
                             <form action="{{ url_for('portal') }}" method="post">
                           <select class="form-select border-0" name="jobportal" au>
-                            <option selected>Portals</option>
+                            <option selected >Portals</option>
                             <option value="1">Naukri</option>
                             <option value="2">Internshala</option>
                             <option value="3">LinkedIn</option>
@@ -154,13 +192,17 @@
                         </div>
                       </div>
                       <div class="tab-content">
+                        {% if data_fetched ==false %}
+                        <script>
+                                document.getElementById("spinner").classList.remove("show")
+                        </script>
+                        {% endif %}
                         {% for key in jobs['title'].keys() %}
                         <div class="job-item p-4 mb-4">
                             <div class="row g-4">
                                 <div class="col-sm-12 col-md-8 d-flex align-items-center me-auto">
-                                    
                                     <img class="flex-shrink-0 img-fluid border rounded" 
-                                         src="img/{{ jobs['source'][key] }}.png" 
+                                         src="static/img/{{ jobs['source'][key] }}.png" 
                                          onerror="this.onerror=null; this.src='img/default.png';" 
                                          alt="{{ jobs['source'][key] }}" 
                                          style="width: 80px; height: 80px;">
@@ -212,13 +254,13 @@
         <div class="container-fluid bg-primary mb-5 wow fadeIn" id="floatingDiv" style="width:50%">
             <h2>Sorter</h2>
             <p>Enter the number of jobs you want:</p>
-            <form action="{{ url_for('aisubmit') }}" method="post">
+            <form action="{{ url_for('aisubmit') }}" method="post" onsubmit="showspinner()">
             <input type="number" class="form-control border-0" name="no_jobs"  id="numberOfJobs" placeholder="Enter the number of jobs">
             
             <br>
-            <div class="row">
+            <!-- <div class="row"> -->
                 <div class="col">
-                    <button type="submit" class="btn btn-dark border-0 mb-2 w-100" id="submitButton" >Submit</button>
+                    <button type="submit" class="btn btn-dark border-0 mb-2 w-100" id="submitButton" required >Submit</button>
                 </div>
                 </form>
                 <div class="col">
@@ -303,13 +345,13 @@ form.addEventListener('submit', () => {
   spinner.style.display = 'block';
 });
 
-// let show = false;
-// function showspinner(){
-//     if(show == false){
-//         show = true;
-//     }
-//     document.getElementById("spinner").classList.add("show")
-// }
+let show = false;
+function showspinner(){
+    if(show == false){
+        show = true;
+    }
+    document.getElementById("spinner").classList.add("show")
+}
 
 </script>
 
