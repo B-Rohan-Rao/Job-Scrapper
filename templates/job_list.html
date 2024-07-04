@@ -212,12 +212,15 @@
         <div class="container-fluid bg-primary mb-5 wow fadeIn" id="floatingDiv" style="width:50%">
             <h2>Sorter</h2>
             <p>Enter the number of jobs you want:</p>
-            <input type="number" class="form-control border-0" id="numberOfJobs" placeholder="Enter the number of jobs">
+            <form action="{{ url_for('aisubmit') }}" method="post">
+            <input type="number" class="form-control border-0" name="no_jobs"  id="numberOfJobs" placeholder="Enter the number of jobs">
+            
             <br>
             <div class="row">
                 <div class="col">
-                    <button class="btn btn-dark border-0 mb-2 w-100" id="submitButton" href="{{ url_for('rec') }}">Submit</button>
+                    <button type="submit" class="btn btn-dark border-0 mb-2 w-100" id="submitButton" >Submit</button>
                 </div>
+                </form>
                 <div class="col">
                     <button class="btn border-0 mb-2" id="goBackButton">
                         <i class="fas fa-arrow-left"></i>

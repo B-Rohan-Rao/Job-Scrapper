@@ -16,6 +16,12 @@ app.secret_key = secretkey
 def index():
     return render_template("index.html")
 
+@app.route('/aisubmit',methods=['GET','POST'])
+def aisubmit():
+    if request.method == 'POST':
+        no_of_jobs = request.form['no_jobs']
+        return no_of_jobs
+
 
 @app.route('/portal',methods=['GET','POST'])
 def portal():
