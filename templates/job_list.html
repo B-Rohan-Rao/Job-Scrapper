@@ -159,7 +159,11 @@
                         <div class="job-item p-4 mb-4">
                             <div class="row g-4">
                                 <div class="col-sm-12 col-md-8 d-flex align-items-center me-auto">
-                                    <img class="flex-shrink-0 img-fluid border rounded" src="img/{{ jobs['company'][key] }}.jpg" alt="" style="width: 80px; height: 80px;">
+                                    <img class="flex-shrink-0 img-fluid border rounded" 
+                                         src="img/{{ jobs['source'][key] }}.jpg" 
+                                         onerror="this.onerror=null; this.src='img/default.jpg';" 
+                                         alt="{{ jobs['source'][key] }}" 
+                                         style="width: 80px; height: 80px;">
                                     <div class="text-start ps-4">
                                         <h4 class="mb-3"><b>{{ jobs['title'][key] }}</b></h4>
                                         <h6 class="mb-3">{{ jobs['company'][key] }}</h6>
@@ -176,8 +180,7 @@
                             </div>
                         </div>
                         {% endfor %}
-                    </div>
-                    
+                    </div>                    
                         <nav aria-label="Page navigation">
                             <ul class="pagination justify-content-center">
                                 {% if page > 1 %}
@@ -223,6 +226,23 @@
         </div>
         <!-- Jobs End -->
 
+        <!-- Footer Start -->
+        <footer class="bg-dark text-center text-white py-4">
+            <div class="container">
+                <p>&copy; 2024 JobEntry. All Rights Reserved.</p>
+                <p>Follow us on</p>
+                <div>
+                    <a href="https://github.com/your-github" class="text-white me-4">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/your-linkedin" class="text-white">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer End -->
+
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
@@ -244,53 +264,31 @@
     });
 
 
-document.getElementById('talktoai').addEventListener('click', function() {
-var floatingDiv = document.getElementById('floatingDiv');
-floatingDiv.style.display = 'block';
+    document.getElementById('talktoai').addEventListener('click', function () {
+    var floatingDiv = document.getElementById('floatingDiv');
+    floatingDiv.style.display = 'block';
 
-// Add click event listener for submit button
-document.getElementById('submitButton').addEventListener('click', function() {
-  var skills = document.getElementById('skillsInput').value;
-  var salary = document.getElementById('salaryInput').value;
-  
-  // Process the user input (skills and salary) here
-  // (e.g., send to server, display a message)
-  
-  console.log("Skills:", skills);
-  console.log("Expected Salary:", salary);
-});
+    // Add click event listener for submit button
+    document.getElementById('submitButton').addEventListener('click', function () {
+        var numberOfJobs = document.getElementById('numberOfJobs').value;
+
+        // Process the user input (numberOfJobs) here
+        // (e.g., send to server, display a message)
+        console.log("Number of Jobs:", numberOfJobs);
+
+        // Hide the floating div after processing user input
+        floatingDiv.style.display = 'none';
+    });
 });
 
-      // Get references to the buttons
+// Get references to the buttons
 const goBackButton = document.getElementById("goBackButton");
 const floatingDiv = document.getElementById("floatingDiv");
 
 // Add click event listener to the "Go Back" button
-goBackButton.addEventListener("click", function() {
-// Hide the floating div
-floatingDiv.style.display = "none";
-});
-
-document.getElementById('talktoai').addEventListener('click', function() {
-var floatingDiv = document.getElementById('floatingDiv');
-floatingDiv.style.display = 'block';
-
-// Add click event listener for submit button
-document.getElementById('submitButton').addEventListener('click', function(event) {
-  var skills = document.getElementById('skillsInput').value;
-  var salary = document.getElementById('salaryInput').value;
-
-  // Process the user input (skills and salary) here
-  // (e.g., send to server, display a confirmation message)
-  console.log("Skills:", skills);
-  console.log("Expected Salary:", salary);
-  
-  // Prevent default form submission behavior (if applicable)
-  event.preventDefault();
-
-  // Hide the floating div after processing user input
-  floatingDiv.style.display = 'none';
-});
+goBackButton.addEventListener("click", function () {
+    // Hide the floating div
+    floatingDiv.style.display = "none";
 });
 </script>
 
