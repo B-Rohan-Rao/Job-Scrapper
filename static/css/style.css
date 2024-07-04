@@ -432,3 +432,7 @@
     margin-right: 10px;
     border-radius: 50%;
 }
+
+input::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
