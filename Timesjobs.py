@@ -8,7 +8,7 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.support.ui import Select
 import time
 
-PATH = r"C:\Program Files (x86)\chromedriver-win64\chromedriver.exe"
+PATH = r"chromedriver.exe"
 
 def timesjob(job_title, location, exp):
     service = Service(PATH)

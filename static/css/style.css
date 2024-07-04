@@ -391,3 +391,44 @@
     padding-right: 0;
     border-right: none;
 }
+
+
+/* Styles for the floating div */
+#floatingDiv {
+    display: none; /* Initially hidden */
+    position: fixed; /* Fixed position */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust position to be centered */
+    background-color: #f9f9f9; /* Background color */
+    padding: 20px; /* Padding */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
+    border-radius: 8px; /* Rounded corners */
+}
+
+/* Styles for the button */
+#showDivButton {
+    display: block;
+    margin: 50px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#goBackButton {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    /* Adjust font size, color, etc. as needed */
+    font-size: 1.5rem;
+    color: #2B3940;
+    cursor: pointer;
+   }
+
+
+.company-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
